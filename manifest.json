@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "GitHub PR Table Generator",
+    "version": "1.0",
+    "description": "Adds a context menu to generate a table in GitHub PR descriptions.",
+    "permissions": [
+        "contextMenus",
+        "scripting",
+        "activeTab"
+    ],
+    "host_permissions": [
+        "https://github.com/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+}
