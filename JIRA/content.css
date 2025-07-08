@@ -1,0 +1,9 @@
+#copy-jira-ticket-button {
+    background-color: #0052CC;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+#copy-jira-ticket-button:hover {
+    background-color: #0065FF;
+}

@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "JIRA Copy Tickett",
+  "version": "1.0.1",
+  "description": "Adds a button to copy JIRA ticket key to clipboard.",
+  "key": "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCWj75XgbY3J9byhPLlqehibhNyr681jva/Xxj1829Aj1RGTThhgU9s0RG7Cwhs0OecHd2dktZhdRQJ862ip3VV8focBfq2yo9JH4zHsBgQxZ9dim5a+EDD/+6H6IX1AdhcXaU82nvhG+glNhRQrPnpFELeUaWKpxcb9KdW28Hlf5NAjSY6sniA/jJaOFQzvDu6rcpgWcEXy+7wLDdVKn86SCgqWZgpFePbq1Wg1YgDV3GaiZROIdPWilLn0cqxT2UXUNkajxlm4sPUWiECbKOZAYdHpbCXWT3dOcy2rASl/EbB3fURKianDMQwj2EmaHKhRrTfRL810qMaQSRX6ZGzAgMBAAECggEAQ3Ccnl7EK12FivkhQd1C8cADpxXpodBpVxw2Noj1ltH8ukbBj+9Xj9LwIbuV6QQEEqpQB9Jrg5jpQnHrn1VqGfa7BM1q2XDPEL54lUOb6/tRYJluyAG2JPUhN7BgPHg4nVr29lSZM6KH8A8St3ZbtNr1/tZMk9g3YjbKs/3Ykr7L6NVUF6Ow/Q/YZ17wWrDAGCOiZmQyegp9TXIMjsDpLbE9+cDzJcGvHEzbIMLgeLHGgt+taqJqf29yigVw0Ix5U/mGg1jFKDUUKnCEUeC49tDowOCU08I4KviLzaLPYynsDb8YszaNtOcBnAsP+HmTTcK6Zl3ZRClhfGhwrq5OqQKBgQDFn/Fk18OpZFdMziVCIkCZs5USQH9k8EGuljsL+nMjJ357RDefTDU5QqIoNqAcHOvbM8kO6HnpHcSdEHiRGzqvaRpPgmgXLHuMvEFpa1TaOYW6RUnibP+nIzslHzJ1x2LMSxMavDPFXz7QFrGoUxPMpbC5Oww+fqAXJMWCnVKsywKBgQDDCPQj4whoUI31zhQO9DGQ0GYAZ9QJ4+Kh6z0YkCF132SlEnpf4f5mldgouN1lsddTTHzxJao+gK5tIxwRd4Mr2b96fKP4wNkPevLA9iTEy1Z2bYLWWwUJvNO833jIIBosBSAuS9jbWT+Vey/6zS/AyqQI8svXiMamFoJBG2S5uQKBgClQn8GqTfBq1slqy2VBDepUHdUcAMYUaFbcd2mwqUNvLUUN5Ob7oqDe6lGn4d8euLwx3lWsilgO7hy75cjIPYOQYHzA0YwOs6GfdblZQ/r/TZK8i463pNbHScUf+Yef8GqvQ0YylEwt9k7Af9Gl1JzTAtgmnQ+vnz5XZKdCxpbzAoGBAJn7UbWbo6GoJ8xvnYqI5TEuN7oOP2xnjSDFdwETmjdT3kQtqIxXAuG/YGAWREXr+NL9So+hax3ZvtzPoXNw5hES44gzK8pTh4wfR9VtAG6XE3aA05GlXv7nJEy0Ksnl/oPOsC+dFmNnvTmpfqIGqbMOyh9+gc1zYVLz5na8x/ORAoGAcMTMS7AlAvNgkyPuFXwADJ/l0whjgVoLcZWN+uRJiSWiG3A8CmoGF5Oyo1lteE8De9qfIlsqWPu5WJolvjqYtGEf9xkJeyKRUAbGPaEOkngeuKTgJFFVvJjQe/imS7Nmw/SKUKG8piipBAn/MepC4kwaX0UGVWv7HV+wMZPJkIc=",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "permissions": [
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+          "https://*/browse/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ]
+}

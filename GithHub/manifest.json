@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Table Tools",
+  "version": "1.0",
+  "description": "Inject table tools into GitHub editor",
+  "permissions": [
+    "contextMenus",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://github.com/*",
+    "https://github.sc-corp.net/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*", "https://github.sc-corp.net/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "GitHub Tools"
+  }
+}
