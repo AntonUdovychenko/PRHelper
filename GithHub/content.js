@@ -63,9 +63,7 @@ function insertActionBarButton() {
       }, 0); // or use requestAnimationFrame(() => { ... })
     });
 
-
     wrapper.appendChild(button);
-    bar.appendChild(wrapper);
 
     // --- Swap Columns Button ---
     const swapWrapper = document.createElement("div");
@@ -131,11 +129,74 @@ function insertActionBarButton() {
         }
       }, 0);
     });
-
-
     swapWrapper.appendChild(swapButton);
-    bar.appendChild(swapWrapper);
 
+    // --- Wrap into <video> Button ---
+    const videoWrapper = document.createElement("div");
+    videoWrapper.className = "ActionBar-item";
+    videoWrapper.setAttribute("data-view-component", "true");
+    videoWrapper.setAttribute("data-offset-width", "32");
+    videoWrapper.style.visibility = "visible";
+
+    const videoButton = document.createElement("button");
+    videoButton.type = "button";
+    videoButton.className = "Button Button--iconOnly Button--invisible Button--medium gh-wrap-video-button";
+    videoButton.setAttribute("aria-label", "Wrap selected text in <video>");
+
+    videoButton.innerHTML = `
+      <svg aria-hidden="true" height="16" width="16" viewBox="0 0 16 16" class="octicon">
+        <path d="M1.75 3A1.75 1.75 0 0 0 0 4.75v6.5C0 12.216.784 13 1.75 13h12.5A1.75 1.75 0 0 0 16 11.25v-6.5A1.75 1.75 0 0 0 14.25 3H1.75Zm12.5 1.5c.138 0 .25.112.25.25v6.5c0 .138-.112.25-.25.25H1.75a.25.25 0 0 1-.25-.25v-6.5c0-.138.112-.25.25-.25h12.5Z"></path>
+      </svg>
+    `;
+
+    videoButton.addEventListener("mousedown", () => {
+      const activeElement = document.activeElement;
+      const selectedText = window.getSelection().toString();
+
+      setTimeout(() => {
+        if (
+          !activeElement ||
+          (activeElement.tagName !== "TEXTAREA" && !activeElement.isContentEditable)
+        ) {
+          alert("Please focus on an editable field to wrap text into <video>.");
+          return;
+        }
+
+        if (!selectedText) {
+          alert("Please select text to wrap into <video>.");
+          return;
+        }
+
+        const cleanedSrc = selectedText.replace(/\s+$/, ""); // trim trailing newline/space
+        const wrappedText = `<video src="${cleanedSrc}" />`;
+
+        if (activeElement.tagName === "TEXTAREA") {
+          const start = activeElement.selectionStart;
+          const end = activeElement.selectionEnd;
+          const text = activeElement.value;
+
+          activeElement.value =
+            text.slice(0, start) + wrappedText + text.slice(end);
+          activeElement.selectionStart =
+            activeElement.selectionEnd =
+            start + wrappedText.length;
+        } else if (activeElement.isContentEditable) {
+          document.execCommand("insertText", false, wrappedText);
+        }
+      }, 0);
+    });
+
+
+    videoWrapper.appendChild(videoButton);
+
+    const divider = document.createElement("div");
+    divider.className = "ActionBar-separator";
+    divider.setAttribute("data-view-component", "true");
+
+    bar.appendChild(divider);
+    bar.appendChild(wrapper);
+    bar.appendChild(swapWrapper);
+    bar.appendChild(videoWrapper);
   });
 }
 
