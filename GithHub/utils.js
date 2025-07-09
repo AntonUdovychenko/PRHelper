@@ -3,8 +3,7 @@ const CONSTANTS = {
         BASE: "Button Button--iconOnly Button--invisible Button--medium",
         TABLE: "gh-insert-table-button",
         SWAP: "gh-swap-columns-button",
-        VIDEO: "gh-wrap-video-button",
-        COOL: "gh-insert-cool-button"
+        VIDEO: "gh-wrap-video-button"
     },
     SELECTORS: {
         ACTION_BAR: ".ActionBar",
