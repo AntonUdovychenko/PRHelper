@@ -1,3 +1,10 @@
+// background.js
+const scriptFileMap = {
+  generateTable: "table.js",
+  swapColumns: "swap.js",
+  wrapIntoVideo: "wrapVideo.js",
+};
+
 chrome.runtime.onInstalled.addListener(() => {
   const items = [
     { id: "generateTable", title: "Generate Before/After Table" },
@@ -5,49 +12,34 @@ chrome.runtime.onInstalled.addListener(() => {
     { id: "wrapIntoVideo", title: "Wrap into <video>" },
   ];
 
-  for (const item of items) {
+  items.forEach(item => {
     chrome.contextMenus.create({
       id: item.id,
       title: item.title,
       contexts: ["editable"],
     });
-  }
+  });
 });
+
+function executeScript(tabId, file) {
+  return chrome.scripting.executeScript({
+    target: { tabId },
+    files: [file]
+  });
+}
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  const scriptFileMap = {
-    generateTable: "content.js",
-    swapColumns: "swap.js",
-    wrapIntoVideo: "wrapVideo.js",
-  };
-
   const scriptFile = scriptFileMap[info.menuItemId];
   if (scriptFile) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: [scriptFile],
-    });
+    executeScript(tab.id, scriptFile);
   }
 });
 
-// ✅ Add this to respond to messages from page-injected buttons
 chrome.runtime.onMessage.addListener((message, sender) => {
-  if (!sender.tab) return; // Skip if no tab (e.g. from popup)
+  if (!sender.tab) return;
 
-  if (message.action === "swapColumns") {
-    chrome.scripting.executeScript({
-      target: { tabId: sender.tab.id },
-      files: ["swap.js"],
-    });
-  } else if (message.action === "generateTable") {
-    chrome.scripting.executeScript({
-      target: { tabId: sender.tab.id },
-      files: ["content.js"],
-    });
-  } else if (message.action === "wrapIntoVideo") {
-    chrome.scripting.executeScript({
-      target: { tabId: sender.tab.id },
-      files: ["wrapVideo.js"],
-    });
+  const scriptFile = scriptFileMap[message.action];
+  if (scriptFile) {
+    executeScript(sender.tab.id, scriptFile);
   }
 });
