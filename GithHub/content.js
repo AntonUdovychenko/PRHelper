@@ -30,6 +30,14 @@ function insertActionBarButton() {
         action: "wrapIntoVideo",
         svgPath: "M0 4.75A1.75 1.75 0 0 1 1.75 3h12.5A1.75 1.75 0 0 1 16 4.75v6.5A1.75 1.75 0 0 1 14.25 13H1.75A1.75 1.75 0 0 1 0 11.25v-6.5zM6 7.5L10 10V5L6 7.5z",
         onClick: () => chrome.runtime.sendMessage({ action: "wrapIntoVideo" })
+      },
+      {
+        className: CONSTANTS.BUTTON_CLASSES.COOL,
+        ariaLabel: "Insert :cool:",
+        tooltip: "Insert :cool: emoji",
+        action: "insertCool",
+        svgPath: "M8 1.5c3.59 0 6.5 2.91 6.5 6.5s-2.91 6.5-6.5 6.5S1.5 11.59 1.5 8 4.41 1.5 8 1.5zM4.5 7.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5S6 9.83 6 9s-.67-1.5-1.5-1.5zm7 0c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5S13 9.83 13 9s-.67-1.5-1.5-1.5zm-7.5 4h7c.28 0 .5-.22.5-.5s-.22-.5-.5-.5", // Simple smiley face icon
+        onClick: () => chrome.runtime.sendMessage({ action: "insertCool" })
       }
     ];
 

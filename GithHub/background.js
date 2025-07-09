@@ -3,6 +3,7 @@ const scriptFileMap = {
   generateTable: "table.js",
   swapColumns: "swap.js",
   wrapIntoVideo: "wrapVideo.js",
+  insertCool: "cool.js"
 };
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -10,6 +11,7 @@ chrome.runtime.onInstalled.addListener(() => {
     { id: "generateTable", title: "Generate Before/After Table" },
     { id: "swapColumns", title: "Swap Columns" },
     { id: "wrapIntoVideo", title: "Wrap into <video>" },
+    { id: "insertCool", title: "Insert :cool:" }
   ];
 
   items.forEach(item => {

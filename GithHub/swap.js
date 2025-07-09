@@ -21,11 +21,27 @@ Please focus on a text field before clicking the button.`);
         return;
     }
 
-    const selectedText = window.getSelection()?.toString();
+    let selectedText = window.getSelection()?.toString();
+    const fullText = activeElement.value || activeElement.textContent;
 
     if (!selectedText) {
-        alert("Please select the table first.");
-        return;
+        // Search for the first Before/After table in the text, allowing for optional whitespace
+        const tableRegex = /\|\s*Before.*?\|\s*After.*?\|[\s\S]*?\|[^|]*\|[^|]*\|[\s\S]*?\|[^|]*\|[^|]*\|/;
+        const match = fullText.match(tableRegex);
+        
+        if (!match) {
+            alert("No Before/After table found in the text. Please select a table manually.");
+            return;
+        }
+        
+        const tableStartIndex = fullText.indexOf(match[0]);
+        const tableEndIndex = tableStartIndex + match[0].length;
+        
+        if (activeElement.tagName === "TEXTAREA") {
+            activeElement.setSelectionRange(tableStartIndex, tableEndIndex);
+        }
+        
+        selectedText = match[0];
     }
 
     function swapTableColumns(text) {
